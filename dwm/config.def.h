@@ -1,5 +1,5 @@
 /* DWM config by Nicklas Rudolfsson - https://github.com/nirucon */
-/* Vanilla base (dwm 6.6). Requires: brightnessctl, pamixer, maim, flameshot, rofi, st, alacritty, brave */
+/* Vanilla base (dwm 6.6). Requires: brightnessctl, PipeWire, maim, flameshot, rofi, st, alacritty, brave */
 
 /* ---- Compatibility shim for some patched dwm.c expecting `refreshrate` ---- */
 #ifndef REFRESH_RATE
@@ -110,11 +110,11 @@ static const char *fmcmd[]        = { "pcmanfm", NULL };   /* Super+Shift+f */
 static const char *br_up[]   = { "brightnessctl", "set", "+5%", NULL };
 static const char *br_down[] = { "brightnessctl", "set", "5%-", NULL };
 
-/* Audio (requires: pamixer) */
-static const char *vol_up[]     = { "pamixer", "-i", "5", NULL };
-static const char *vol_down[]   = { "pamixer", "-d", "5", NULL };
-static const char *vol_toggle[] = { "pamixer", "-t", NULL };
-static const char *mic_toggle[] = { "pamixer", "--default-source", "-t", NULL };
+/* Audio (PipeWire native) */
+static const char *vol_up[]     = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",   "5%+",    NULL };
+static const char *vol_down[]   = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",   "5%-",    NULL };
+static const char *vol_toggle[] = { "wpctl", "set-mute",   "@DEFAULT_AUDIO_SINK@",   "toggle", NULL };
+static const char *mic_toggle[] = { "wpctl", "set-mute",   "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL };
 
 /* Screenshots (requires: maim, flameshot, slop, xclip, libnotify) */
 static const char *ss_select[] = {
