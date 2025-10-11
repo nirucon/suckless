@@ -101,6 +101,10 @@ static const char *bravecmd[]     = { "brave", NULL };
 /* Rofi (Run mode) */
 static const char *rofiruncmd[]   = { "rofi", "-show", "run", NULL };
 
+/* System / security (NYTT: för dina binds) */
+static const char *lockcmd[]      = { "slock", NULL };     /* Super+Esc */
+static const char *fmcmd[]        = { "pcmanfm", NULL };   /* Super+Shift+f */
+
 /* Brightness (requires: brightnessctl) */
 static const char *br_up[]   = { "brightnessctl", "set", "+5%", NULL };
 static const char *br_down[] = { "brightnessctl", "set", "5%-", NULL };
@@ -137,7 +141,7 @@ static const char *ss_flameshot[] = {
 };
 
 /*========================
-  Keys (no conflicts)
+  Keys
 =========================*/
 static const Key keys[] = {
 	/* modifier                     key                     function        argument */
@@ -149,7 +153,12 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,                   spawn,          {.v = rofiruncmd } },     /* Super+Shift+p -> rofi -show run */
 	{ MODKEY,                       XK_p,                   spawn,          {.v = dmenucmd } },       /* Super+p -> dmenu (MatteBlack) */
 
-	/* Window / layout control */
+	/* System / security (NYTT: endast tre rader) */
+	{ MODKEY,                       XK_Escape,              spawn,          {.v = lockcmd } },             /* Super+Esc -> slock */
+	{ MODKEY|ShiftMask,             XK_f,                   spawn,          {.v = fmcmd } },               /* Super+Shift+f -> pcmanfm */
+	{ MODKEY|ShiftMask,             XK_Escape,              spawn,          SHCMD("systemctl suspend") },  /* Super+Shift+Esc -> suspend */
+
+	/* Window / layout control (oförändrat) */
 	{ MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,                   incnmaster,     {.i = +1 } },
@@ -182,14 +191,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_0,                   view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                   tag,            {.ui = ~0 } },
 
-	/* Bar toggle moved to Super+Shift+b (Super+b is Brave) */
+	/* Bar toggle */
 	{ MODKEY|ShiftMask,             XK_b,                   togglebar,      {0} },
 
 	/* Kill active window & restart dwm */
 	{ MODKEY,                       XK_q,                   killclient,     {0} },          /* Super+q -> kill focused */
-	{ MODKEY|ShiftMask,             XK_q,                   quit,           {0} },          /* Super+Shift+q -> quit (restart via launcher loop) */
+	{ MODKEY|ShiftMask,             XK_q,                   quit,           {0} },          /* Super+Shift+q -> quit */
 
-	/* Zoom (vanilla: swap focused with master) — per your clarification */
+	/* Zoom (vanilla) */
 	{ MODKEY|ShiftMask,             XK_z,                   zoom,           {0} },
 
 	/* Brightness hardware keys */
