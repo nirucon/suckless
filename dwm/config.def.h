@@ -94,6 +94,10 @@ static const char *dmenucmd[] = {
 	NULL
 };
 
+/* Scratchpad */
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+
 /* Launchers / apps */
 static const char *stcmd[]        = { "st", NULL };
 static const char *alacrittycmd[] = { "alacritty", NULL };
@@ -201,6 +205,9 @@ static const Key keys[] = {
 
 	/* Zoom (vanilla) */
 	{ MODKEY|ShiftMask,             XK_z,                   zoom,           {0} },
+
+  /* Scratchpad */
+  { MODKEY|ShiftMask,             XK_s,                   togglescratch,  {.v = scratchpadcmd } },
 
 	/* Brightness hardware keys */
 	{ 0,                            XF86XK_MonBrightnessUp,   spawn,        {.v = br_up } },
