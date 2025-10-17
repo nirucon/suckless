@@ -53,6 +53,10 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,     NULL,       0,         1,          -1 },
 };
 
+/* === Custom layout funcs === */
+#include "tileleft.c"
+#include "rstack.c"
+
 /*========================
   Layout(s)
 =========================*/
@@ -62,10 +66,12 @@ static const int resizehints = 0;    /* respect size hints */
 static const int lockfullscreen = 1; /* focus on fullscreen window */
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* default */
-	{ "><>",      NULL },    /* floating */
-	{ "[M]",      monocle },
+    { "=[]",      tileleft },  /* leftstack (stack vänster, master höger) — default */
+    { "[]=",      rstack },    /* rightstack (original: master vänster, stack höger) */
+    { "><>",      NULL },      /* floating */
+    { "[O]",      monocle },
+    { "|M|",      centeredmaster },
+    { ">M>",      centeredfloatingmaster },
 };
 
 /*========================
@@ -171,11 +177,16 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_h,                   setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,                   setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Tab,                 view,           {0} },
-	{ MODKEY,                       XK_t,                   setlayout,      {.v = &layouts[0]} },
+	{ MODKEY, 			XK_t, 			setlayout, 	{.v = &layouts[0]} }, /* Super+t = leftstack */
+	{ MODKEY, 			XK_y, 			setlayout, 	{.v = &layouts[1]} }, /* Super+y = rightstack */
 	{ MODKEY,                       XK_f,                   setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,                   setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,               setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,               togglefloating, {0} },
+        { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
+        { MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+        { MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
+        { MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 
 	/* Monitors */
 	{ MODKEY,                       XK_comma,               focusmon,       {.i = -1 } },
