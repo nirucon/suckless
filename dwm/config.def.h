@@ -108,6 +108,7 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static const char *stcmd[]        = { "st", NULL };
 static const char *alacrittycmd[] = { "alacritty", NULL };
 static const char *bravecmd[]     = { "brave", NULL };
+static const char *wallnext[] = { "/bin/sh", "-c", "~/.local/bin/wallrotate.sh next", NULL };
 
 /* Rofi (Run mode) */
 static const char *rofiruncmd[]   = { "rofi", "-show", "run", NULL };
@@ -229,6 +230,9 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,        {.v = vol_down } },
 	{ 0,                            XF86XK_AudioMute,         spawn,        {.v = vol_toggle } },
 	{ 0,                            XF86XK_AudioMicMute,      spawn,        {.v = mic_toggle } },
+
+	/* Wallpaper */
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallnext } },   /* Super+Shift+W -> next wallpaper */
 
 	/* Screenshots */
 	{ 0,                            XK_Print,               spawn,          {.v = ss_select } },     /* Print -> maim -s (region) */
