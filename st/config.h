@@ -95,27 +95,29 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* Terminal colors (MatteBlack palette) */
+/* Terminal colors (MatteBlack palette - IMPROVED VERSION)
+ * Changed colors 1-3 to be more visible while keeping the dark aesthetic
+ */
 static const char *colorname[] = {
   /* 8 normal colors */
   "#0f0f10", /* black   (bg) */
-  "#3a3a3d", /* red     */
-  "#2a2a2d", /* green   */
-  "#5a5a60", /* yellow  */
-  "#a8a8a8", /* blue    */
-  "#e5e5e5", /* magenta */
-  "#5a5a60", /* cyan    */
+  "#88c0d0", /* red     - NOW NORD BLUE (was #3a3a3d) */
+  "#5e81ac", /* green   - darker blue shade (was #2a2a2d) */
+  "#81a1c1", /* yellow  - medium blue (was #5a5a60) */
+  "#a8a8a8", /* blue    - keeping original gray-blue */
+  "#e5e5e5", /* magenta - bright white accent */
+  "#8fbcbb", /* cyan    - nord cyan (was #5a5a60) */
   "#e5e5e5", /* white   (fg) */
 
   /* 8 bright colors */
-  "#0f0f10",
-  "#3a3a3d",
-  "#2a2a2d",
-  "#5a5a60",
-  "#a8a8a8",
-  "#e5e5e5",
-  "#5a5a60",
-  "#e5e5e5",
+  "#0f0f10", /* bright black */
+  "#88c0d0", /* bright red   - nord blue */
+  "#5e81ac", /* bright green - darker blue */
+  "#81a1c1", /* bright yellow - medium blue */
+  "#a8a8a8", /* bright blue */
+  "#e5e5e5", /* bright magenta */
+  "#8fbcbb", /* bright cyan */
+  "#e5e5e5", /* bright white */
 
   [255] = 0,
 
