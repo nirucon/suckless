@@ -146,10 +146,16 @@ static const char *media_play[]     = { "playerctl", "play-pause", NULL };
 static const char *media_next[]     = { "playerctl", "next", NULL };
 static const char *media_prev[]     = { "playerctl", "previous", NULL };
 
-/* Screenshots (requires: maim, flameshot, slop, xclip, libnotify, rofi) */
+/* Screenshots (requires: maim, flameshot, slop, xclip, libnotify, rofi, sxiv) */
 static const char *ss_select[] = {
   "sh", "-c",
   "~/.local/bin/screenshot-select.sh",
+  NULL
+};
+
+static const char *ss_browser[] = {
+  "sh", "-c",
+  "~/.local/bin/screenshot-browser.sh",
   NULL
 };
 
@@ -271,6 +277,7 @@ static const Key keys[] = {
 	{ 0,                            XK_Print,                 spawn,          {.v = ss_select } },     /* Print -> screenshot with prompt */
 	{ MODKEY,                       XK_Print,                 spawn,          {.v = ss_full } },       /* Super+Print -> full screen */
 	{ MODKEY|ShiftMask,             XK_Print,                 spawn,          {.v = ss_flameshot } },  /* Super+Shift+Print -> flameshot gui */
+	{ MODKEY|Mod1Mask,              XK_s,                     spawn,          {.v = ss_browser } },    /* Super+Alt+S -> browse screenshots */
 };
 
 /*========================
