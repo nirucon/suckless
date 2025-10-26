@@ -146,12 +146,10 @@ static const char *media_play[]     = { "playerctl", "play-pause", NULL };
 static const char *media_next[]     = { "playerctl", "next", NULL };
 static const char *media_prev[]     = { "playerctl", "previous", NULL };
 
-/* Screenshots (requires: maim, flameshot, slop, xclip, libnotify) */
+/* Screenshots (requires: maim, flameshot, slop, xclip, libnotify, rofi) */
 static const char *ss_select[] = {
   "sh", "-c",
-  "tmp=$(mktemp /tmp/shot-XXXXXX.png); "
-  "maim -s \"$tmp\" && xclip -selection clipboard -t image/png -i \"$tmp\" && "
-  "notify-send 'Screenshot' 'Region copied to clipboard' && rm -f \"$tmp\"",
+  "~/.local/bin/screenshot-select.sh",
   NULL
 };
 
@@ -270,7 +268,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_w,                     spawn,          {.v = wallnext } },      /* Super+Shift+W -> next wallpaper */
 
 	/* Screenshots */
-	{ 0,                            XK_Print,                 spawn,          {.v = ss_select } },     /* Print -> maim -s (region) */
+	{ 0,                            XK_Print,                 spawn,          {.v = ss_select } },     /* Print -> screenshot with prompt */
 	{ MODKEY,                       XK_Print,                 spawn,          {.v = ss_full } },       /* Super+Print -> full screen */
 	{ MODKEY|ShiftMask,             XK_Print,                 spawn,          {.v = ss_flameshot } },  /* Super+Shift+Print -> flameshot gui */
 };
