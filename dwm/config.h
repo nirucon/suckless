@@ -120,6 +120,10 @@ static const char *keybindingscmd[] = {
   NULL 
 };
 
+/* Clipboard save */
+static const char *clipsavecmd[] = { "/bin/sh", "-c", "~/.local/bin/clip-save.sh", NULL };
+static const char *clipmenucmd[] = { "/bin/sh", "-c", "~/.local/bin/clip-menu.sh", NULL };
+
 /* System / security */
 static const char *lockcmd[]      = { "slock", NULL };     /* Super+Esc */
 static const char *fmcmd[]        = { "pcmanfm", NULL };   /* Super+Shift+f */
@@ -181,6 +185,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },       /* Super+p -> dmenu (MatteBlack) */
 	{ MODKEY|Mod1Mask,              XK_k,                     spawn,          {.v = keybindingscmd } }, /* Super+Alt+k -> keybindings viewer */
 	{ MODKEY|ShiftMask,             XK_f,                     spawn,          {.v = fmcmd } },          /* Super+Shift+f -> pcmanfm */
+
+	/* Clipboard */
+	{ MODKEY,                       XK_v,                     spawn,          {.v = clipmenucmd } },    /* Super+v -> clipboard menu */
+	{ MODKEY|ShiftMask,             XK_v,                     spawn,          {.v = clipsavecmd } },    /* Super+Shift+v -> save to clipboard history */
 
 	/* System / security */
 	{ MODKEY,                       XK_Escape,                spawn,          {.v = lockcmd } },             /* Super+Esc -> slock */
